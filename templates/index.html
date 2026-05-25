@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>Email Detection</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+
+        <!-- TOP HEADING -->
+
+        <div class="logo">
+
+            MACHINE LEARNING SPAM CLASSIFIER
+
+        </div>
+
+
+
+        <!-- MAIN HEADING -->
+
+        <h1>
+
+            Email Detection
+
+        </h1>
+
+
+
+        <!-- SUBTITLE -->
+
+        <p class="subtitle">
+
+            AI-powered analysis for identifying
+            spam and legitimate email content instantly.
+
+        </p>
+
+
+
+        <!-- FORM -->
+
+        <form action="/predict" method="POST">
+
+            <textarea
+
+                name="message"
+
+                placeholder="Enter your email message here..."
+
+                required></textarea>
+
+
+
+            <button type="submit">
+
+                Analyze Email
+
+            </button>
+
+        </form>
+
+
+
+        <!-- RESULT SECTION -->
+
+        {% if result %}
+
+        <div class="result-box {{ status }}">
+
+            <h2>
+
+                {{ result }}
+
+            </h2>
+
+            <p>
+
+                {{ desc }}
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- ACCURACY TABLE -->
+
+        {% if accuracies %}
+
+        <div class="accuracy-box">
+
+            <h3>
+
+                Model Accuracy
+
+            </h3>
+
+            <table>
+
+                <tr>
+
+                    <th>
+
+                        Algorithm
+
+                    </th>
+
+                    <th>
+
+                        Accuracy
+
+                    </th>
+
+                </tr>
+
+
+                {% for algo, acc in accuracies.items() %}
+
+                <tr>
+
+                    <td>
+
+                        {{ algo }}
+
+                    </td>
+
+                    <td>
+
+                        {{ acc }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script
+    src="{{ url_for('static', filename='script.js') }}">
+    </script>
+
+</body>
+
+</html>
